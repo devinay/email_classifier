@@ -15,4 +15,6 @@ it uses bold font, colors and sort order to
 
 It is expected that the user has a working account that has this information previously.
 
-I have this horrbile problem where I decide to reply to some email and it slips my mind. This comee back and bites me (th eexpression being figurative, and the pain almost literal) later. This is an attempt to use automation to try fix this issue.
+I have this horrbile problem where I decide to reply to some email and it slips my mind. This comee back and bites me later. I come off as incompetent for not staying in touch with email. This is an attempt to use automation to encode my brain rules into code.
+
+Will be using either scala or clojure => TBD
