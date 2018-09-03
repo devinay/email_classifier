@@ -7,6 +7,7 @@
                  [commons-net "3.5"]
                  [org.clojure/clojure "1.8.0"]
                  [com.sun.mail/javax.mail "1.5.6"]]
+  :plugins [[lein2-eclipse "2.0.0"]]
   :main ^:skip-aot email-classifier.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

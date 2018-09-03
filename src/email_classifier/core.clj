@@ -9,3 +9,10 @@
  (println (conn/connect "server" "uname" "pass")))
 
 
+
+;;wishful thinking :
+(write-to-db
+  (convert-to-json
+    (get-from-server (get-last-message-written-in-db))))
+
+;;get-last-message
