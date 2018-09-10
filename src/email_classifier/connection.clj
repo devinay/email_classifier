@@ -1,36 +1,20 @@
-(ns email-classifier.connection
+(ns email-classifier.conn
   "utility for connecting to email server"
-  (:import (org.apache.commons.net PrintCommandListener)
-           (org.apache.commons.net.imap IMAPClient)
-           (javax.mail Session)))
+  (:import (microsoft.exchange.webservices.data.core ExchangeService)
+           (microsoft.exchange.webservices.data.core.enumeration.misc ExchangeVersion)
+           (microsoft.exchange.webservices.data.core.service.item EmailMessage)
+           (microsoft.exchange.webservices.data.credential ExchangeCredentials)
+           (microsoft.exchange.webservices.data.credential WebCredentials)
+           (microsoft.exchange.webservices.data.property.complex MessageBody)
+           (microsoft.exchange.webservices.data.autodiscover IAutodiscoverRedirectionUrl)))
 
 
 
-(defn get-mail [server username password]
-  (doto (IMAPClient.)
-    (.setDefaultTimeout 60000)
-    (.addProtocolCommandListener (PrintCommandListener. System/out true))
-    (.connect server)
-    (.capability)
-    (.login username password)))
-
-(comment    (.setSoTimeout 6000)
-    (.capability)
-    (.select "inbox")
-    (.examine "inbox")
-    (.status "inbox" (into-array String ["MESSAGES"]))
-    (.logout)
-    (.disconnect))
-
-(defn getProps []
-    (doto (new java.util.Properties) (.setProperty "mail.store.protocol" "imaps")))
-
-(defn getStore [] 
-  (. (Session/getInstance (getProps)) getStore))
-
-(defn connect[server uname pass]
-  (doto (getStore) (.connect server uname pass)))
-
-(comment why is (.getDefaultInstance Session (getProps)) throwing a ClassNotFoundException ?)
   
-    
+(defn get-exch-service [email pass]
+  (doto (new ExchangeService)
+    (.setCredentials (new WebCredentials email pass));;    (.setUrl (new URI ews-url))
+    (.autodiscoverUrl email 
+      (reify IAutodiscoverRedirectionUrl
+        (autodiscoverRedirectionUrlValidationCallback [this redirectionUrl]
+          (.startsWith (.toLowerCase redirectionUrl) "https://"))))))

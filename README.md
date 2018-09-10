@@ -32,6 +32,7 @@ The first attempt is :
 (write-to-db
   (convert-to-json
     (get-from-server (get-last-message-written-in-db))))
+    
 
     
     
