@@ -33,6 +33,6 @@ The first attempt is :
   (convert-to-json
     (get-from-server (get-last-message-written-in-db))))
     
-
+Update on April 15 2019. This is going to be somewhat non-software-only : I gave this up for a  while, but I think there may be some value in this still. I am not sure if MS API is the problem or ES. I will work a little wee bit more on this and update. In general the experience is that I have consistently been picking the wrong abstractions. I got lazy loading at 50 working. I plan to load the 50 on to a thread and let it write to ES. 
     
     
